@@ -1,0 +1,101 @@
+@page "{searchString?}"
+@model ProjectManagementApp.Pages.Projects.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form asp-page="./Index" method = "get">
+    <p>
+        Project Name: 
+        <input type = "text" name = "SearchString" value="@Model.CurrentFilter" />
+        <input type = "submit" value = "Search" class = "btn btn-default"/>
+        <a asp-page="./Index">Back to Full List</a>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page = "./Index" asp-route-sortOrder = "@Model.NameSort"
+                    asp-route-currentFilter="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(model => model.Project[0].ProjectName)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                    asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Project[0].DueDate)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].ProjectDes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Project) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @if(item.DueDate < DateTime.Now)
+                {
+                <font color = "red">
+                @Html.DisplayFor(modelItem => item.DueDate)
+                </font>
+                }
+                else{
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectDes)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ProjectID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ProjectID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ProjectID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Project.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Project.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+    asp-route-sortOrder = "@Model.CurrentSort"
+    asp-route-pageIndex ="@(Model.Project.PageIndex - 1)"
+    asp-route-currentFilter="@Model.CurrentFilter"
+    class="btn btn-default @prevDisabled">
+        &larr; Previous
+</a>
+
+<a asp-page="./Index"
+    asp-route-sortOrder = "@Model.CurrentSort"
+    asp-route-pageIndex ="@(Model.Project.PageIndex - 1)"
+    asp-route-currentFilter="@Model.CurrentFilter"
+    class="btn btn-default @prevDisabled">
+        @Model.Project.PageIndex
+</a>
+
+<a asp-page="./Index"
+    asp-route-sortOrder="@Model.CurrentSort"
+    asp-route-pageIndex="@(Model.Project.PageIndex + 1)"
+    asp-route-currentFilter="@Model.CurrentFilter"
+    class = "btn btn-default @nextDisabled">
+       Next &rarr;
+</a>
