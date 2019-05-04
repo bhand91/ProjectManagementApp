@@ -43,8 +43,9 @@ namespace ProjectManagementApp.Pages.Projects
             }
 
             Project = await _context.Projects.Include(pm => pm.ProjectMembers).ThenInclude(m => m.Member).FirstOrDefaultAsync(m => m.ProjectID == id);
-            var memberList = _context.Members.Select( p => new {ID = p.MemberID, Display = string.Format($"{p.FirstName} {p.LastName}")}).Select(p => p);
-            MemberDropDown = new SelectList(await memberList.Distinct().ToListAsync(), "ID", "Display");
+            var memberList = _context.Members.Select( p => new {ID = p.MemberID, Display = p.FullName}).Select(p => p);
+            Members = await _context.Members.ToListAsync();
+            MemberDropDown = new SelectList(Members, "MemberID", "FullName");
 
             if (Project == null)
             {
