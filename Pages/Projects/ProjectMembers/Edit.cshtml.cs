@@ -35,7 +35,7 @@ namespace ProjectManagementApp.Pages.ProjectMembers
                 .Include(p => p.Project).FirstOrDefaultAsync(m => m.ID == id);
 
             ProjectMember = await _context.ProjectMembers.Include(m => m.Member).Include(p => p.Project).FirstOrDefaultAsync(pm => pm.ID == id);
-            var roleList = _context.ProjectMembers.Select( p => new {ID = p.MemberRole, Display = string.Format($"{p.MemberRole}")}).Select(p => p);
+            var roleList = _context.ProjectMembers.Select( p => new {ID = p.MemberRole, Display = string.Format($"{p.MemberRole}")});
             EnumDropDown = new SelectList(await roleList.Distinct().ToListAsync(), "ID", "Display");
             
             if (ProjectMember == null)

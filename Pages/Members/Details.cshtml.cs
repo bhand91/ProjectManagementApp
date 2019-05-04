@@ -54,7 +54,8 @@ namespace ProjectManagementApp.Pages.Members
 
         public async Task<IActionResult> OnPostDeleteProjectAsync(int? id)
         {
-            _log.LogWarning($"OnPost: MemberId {id}, DROP course {ProjectIdToDelete}");
+            
+            _log.LogWarning($"OnPost: MemberId {id}, DROP project {ProjectIdToDelete}");
             if (id == null)
             {
                 return NotFound();

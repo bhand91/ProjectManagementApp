@@ -25,13 +25,13 @@ namespace ProjectManagementApp.Pages.Projects
         public Project Project { get; set; }
         public List<Member> Members {get; set;}
 
-        public ProjectMember ProjectMember {get; set;}
-
         public SelectList MemberDropDown {get; set;}
+        
         [BindProperty]
         [Display(Name = "Member")]
-        [Required]
+        //[Required]
         public int MemberIdToAdd {get; set;}
+        
         [BindProperty]
         public int MemberIdToDelete {get; set;}
 
@@ -61,10 +61,8 @@ namespace ProjectManagementApp.Pages.Projects
             }
 
             Project = await _context.Projects.Include(pm => pm.ProjectMembers).ThenInclude(m => m.Member).FirstOrDefaultAsync(m => m.ProjectID == id);
-            var memberList = _context.Members.Select( p => new {ID = p.MemberID, Display = string.Format($"{p.FirstName} {p.LastName}")}).Select(p => p);
-            MemberDropDown = new SelectList(await memberList.Distinct().ToListAsync(), "ID", "Display");
 
-            if(memberList == null)
+            if(Project == null)
             {
                 return NotFound();
             }

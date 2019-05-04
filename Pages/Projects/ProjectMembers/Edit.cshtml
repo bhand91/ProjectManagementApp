@@ -25,10 +25,14 @@
                 <span asp-validation-for="ProjectMember.Member.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectMember.MemberRole" class="control-label"></label>
-                <select asp-for="ProjectMember.MemberRole" class="form-control" asp-items = "ViewBag.MemberRole"></select>
-                <span asp-validation-for="ProjectMember.MemberRole" class="text-danger"></span>
-            </div>
+                <label for="ProjectMember.MemberRole">Member Role:</label>
+                <select class = "form-control" id =" ProjectMember.MemberRole">
+                    <option>Manager</option>
+                    <option>Task Worker</option>
+                    <option>Specialist</option>
+                    <option>Researcher</option>
+                </select>
+             </div>
             <div class="form-group">
                 <label asp-for="ProjectMember.AssignmentDes" class="control-label"></label>
                 <input asp-for="ProjectMember.AssignmentDes" class="form-control" />
