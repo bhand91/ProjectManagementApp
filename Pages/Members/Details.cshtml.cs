@@ -70,8 +70,20 @@ namespace ProjectManagementApp.Pages.Members
                 return NotFound();
             }
 
-            ProjectMember projectToDrop = _context.ProjectMembers.Find(ProjectIdToDelete, id.Value);
+            //ProjectMember projectToDrop = _context.ProjectMembers.Find(ProjectIdToDelete, id.Value);
 
+            
+            if (!_context.ProjectMembers.Any(pm => pm.ProjectID == ProjectIdToDelete && pm.MemberID == id.Value))
+            {
+                var projectToDrop = _context.ProjectMembers.Where(pm => pm.ProjectID == ProjectIdToDelete && pm.MemberID == id);
+                _context.Remove(projectToDrop);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _log.LogWarning("Member not in project");
+            }
+/* 
             if (projectToDrop != null)
             {
                 _context.Remove(projectToDrop);
@@ -81,7 +93,7 @@ namespace ProjectManagementApp.Pages.Members
             {
                 _log.LogWarning("Member not part of project");
             }
-
+*/
             return RedirectToPage(new {id = id});
         }
 
