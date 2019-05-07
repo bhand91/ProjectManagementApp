@@ -2,7 +2,7 @@
 @model ProjectManagementApp.Pages.Members.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
 }
 
 <h1>Index</h1>
@@ -10,6 +10,16 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method = "get">
+    <p>
+        Project Name: 
+        <input type = "text" name = "SearchString" value="@Model.CurrentFilter" />
+        <input type = "submit" value = "Search" class = "btn btn-default"/>
+        <a asp-page="./Index">Back to Full List</a>
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -17,7 +27,10 @@
                 @Html.DisplayNameFor(model => model.Member[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Member[0].LastName)
+                <a asp-page = "./Index" asp-route-sortOrder = "@Model.LastNameSort"
+                    asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Member[0].LastName)
+                </a>
             </th>
             <th></th>
         </tr>
@@ -40,3 +53,32 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Member.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Member.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+    asp-route-sortOrder = "@Model.CurrentSort"
+    asp-route-pageIndex ="@(Model.Member.PageIndex - 1)"
+    asp-route-currentFilter="@Model.CurrentFilter"
+    class="btn btn-default @prevDisabled">
+        &larr; Previous
+</a>
+
+<a asp-page="./Index"
+    asp-route-sortOrder = "@Model.CurrentSort"
+    asp-route-pageIndex ="@(Model.Member.PageIndex - 1)"
+    asp-route-currentFilter="@Model.CurrentFilter"
+    class="btn btn-default @prevDisabled">
+        @Model.Member.PageIndex
+</a>
+
+<a asp-page="./Index"
+    asp-route-sortOrder="@Model.CurrentSort"
+    asp-route-pageIndex="@(Model.Member.PageIndex + 1)"
+    asp-route-currentFilter="@Model.CurrentFilter"
+    class = "btn btn-default @nextDisabled">
+       Next &rarr;
+</a>
