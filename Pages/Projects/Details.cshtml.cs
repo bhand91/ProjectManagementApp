@@ -68,7 +68,7 @@ namespace ProjectManagementApp.Pages.Projects
                 return NotFound();
             }
 
-            ProjectMember memberToDrop = _context.ProjectMembers.Find(MemberIdToDelete);
+            ProjectMember memberToDrop = _context.ProjectMembers.Where(pm => pm.MemberID == MemberIdToDelete && pm.ProjectID == id).FirstOrDefault();
 
             if (memberToDrop != null)
             {

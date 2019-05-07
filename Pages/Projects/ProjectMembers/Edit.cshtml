@@ -14,6 +14,8 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProjectMember.ID" />
+            <input type = "hidden" asp-for="ProjectMember.ProjectID" />
+            <input type ="hidden" asp-for="ProjectMember.MemberID" />
             <div class="form-group">
                 <label asp-for="ProjectMember.Member.FirstName" class="control-label"></label>
                 <input asp-for="ProjectMember.Member.FirstName" class="form-control" />
@@ -25,13 +27,9 @@
                 <span asp-validation-for="ProjectMember.Member.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="ProjectMember.MemberRole">Member Role:</label>
-                <select class = "form-control" id =" ProjectMember.MemberRole">
-                    <option>Manager</option>
-                    <option>Task Worker</option>
-                    <option>Specialist</option>
-                    <option>Researcher</option>
-                </select>
+                <select asp-items="Model.EnumDropDown"  class="form-control">
+                <option value="">--Select Role to Add--</option>
+            </select>
              </div>
             <div class="form-group">
                 <label asp-for="ProjectMember.AssignmentDes" class="control-label"></label>
