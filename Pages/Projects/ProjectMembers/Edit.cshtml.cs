@@ -75,7 +75,7 @@ namespace ProjectManagementApp.Pages.ProjectMembers
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
 
         private bool ProjectMemberExists(int id)

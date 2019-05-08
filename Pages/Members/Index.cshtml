@@ -32,6 +32,7 @@
                     @Html.DisplayNameFor(model => model.Member[0].LastName)
                 </a>
             </th>
+            <th> Projects</th>
             <th></th>
         </tr>
     </thead>
@@ -43,6 +44,21 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @{
+                    // For each movie, calculate the Average review score and display it
+                    // Or display N/A. @:text will display text in HTML. or you can use a <span> tag
+                    if(item.ProjectMembers.Count > 0) {
+                        int count = item.ProjectMembers.Count();
+                        @Html.DisplayFor(modelItem => count);
+                    }
+                    else
+                    {
+                        @:N/A
+                    }
+
+                }
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.MemberID">Edit</a> |

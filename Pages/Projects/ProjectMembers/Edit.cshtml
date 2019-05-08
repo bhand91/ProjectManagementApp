@@ -27,7 +27,7 @@
                 <span asp-validation-for="ProjectMember.Member.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-items="Model.EnumDropDown"  class="form-control">
+                <select asp-items="Model.EnumDropDown" asp-for="ProjectMember.MemberRole"  class="form-control">
                 <option value="">--Select Role to Add--</option>
             </select>
              </div>
