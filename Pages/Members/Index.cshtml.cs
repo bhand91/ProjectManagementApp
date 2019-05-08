@@ -47,7 +47,7 @@ namespace ProjectManagementApp.Pages.Members
                                                 select m;
             if(!string.IsNullOrEmpty(searchString))
             {
-                memberQuery = memberQuery.Where(m => m.FirstName.ToUpper().Contains(SearchString.ToUpper()) || m.LastName.ToUpper().Contains(SearchString.ToUpper()));
+                memberQuery = memberQuery.Where(m => m.FirstName.ToUpper().Contains(SearchString.ToUpper()) || m.LastName.ToUpper().Contains(SearchString.ToUpper()) || m.FullName.ToUpper().Contains(SearchString.ToUpper()));
             }
 
             switch (sortOrder)
