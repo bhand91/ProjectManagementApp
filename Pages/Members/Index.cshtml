@@ -5,7 +5,7 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>Index</h1>
+<h1>Available Users</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -13,9 +13,9 @@
 
 <form asp-page="./Index" method = "get">
     <p>
-        Project Name: 
+        Member Name: 
         <input type = "text" name = "SearchString" value="@Model.CurrentFilter" />
-        <input type = "submit" value = "Search" class = "btn btn-default"/>
+        <input type = "submit" value = "Search" class = "btn btn-info"/>
         <a asp-page="./Index">Back to Full List</a>
     </p>
 </form>
