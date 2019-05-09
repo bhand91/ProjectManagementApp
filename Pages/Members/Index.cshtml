@@ -47,8 +47,7 @@
             </td>
             <td>
                 @{
-                    // For each movie, calculate the Average review score and display it
-                    // Or display N/A. @:text will display text in HTML. or you can use a <span> tag
+                    // For each user count the number of projects assigned.
                     if(item.ProjectMembers.Count > 0) {
                         int count = item.ProjectMembers.Count();
                         @Html.DisplayFor(modelItem => count);

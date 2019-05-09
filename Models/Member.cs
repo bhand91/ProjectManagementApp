@@ -8,11 +8,13 @@ namespace ProjectManagementApp.Models
     {
         public int MemberID {get; set;}
 
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Use letters only please")]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         [Display(Name = "First Name")]
         public string FirstName {get; set;}
 
-        [StringLength(50, ErrorMessage = "last name cannot be longer than 50 characters.")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Use letters only please")]
+        [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters.")]
         [Display(Name = "Last Name")]
         public string LastName {get; set;}
 
